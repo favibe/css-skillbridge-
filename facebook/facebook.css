@@ -172,7 +172,6 @@ input:focus {
   padding: 0 20px;
 }
 
-.languages,
 .footer-links {
   display: flex;
   flex-wrap: wrap;
@@ -187,11 +186,6 @@ input:focus {
 
 .footer a:hover {
   text-decoration: underline;
-}
-
-.footer-divider {
-  border-bottom: 1px solid #dddfe2;
-  margin: 10px 0;
 }
 
 .copyright {
