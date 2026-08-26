@@ -214,6 +214,14 @@ body {
   transition: background-color 0.15s;
 }
 
+/* Styling for SVG Icons inside Social Buttons */
+/* Styling for SVG Icons inside Social Buttons */
+.social-svg-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
 .btn-submit:hover {
   background-color: #004182;
 }
