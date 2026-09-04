@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ Accordion Card | Frontend Mentor</title>
+  
+  <!-- Google Fonts: Kumbh Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CSS Variables & Reset
+       ========================================================================== */
+    :root {
+      /* Colors */
+      --primary-text-dark: hsl(238, 29%, 16%);
+      --primary-text-accent: hsl(14, 88%, 65%);
+      --text-main: hsl(237, 12%, 33%);
+      --text-subtle: hsl(240, 6%, 50%);
+      --divider-color: hsl(240, 5%, 91%);
+      
+      --bg-grad-top: hsl(273, 75%, 66%);
+      --bg-grad-bottom: hsl(273, 54%, 51%);
+      --card-bg: hsl(0, 0%, 100%);
+      
+      /* Typography */
+      --font-family: 'Kumbh Sans', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: 12px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(180deg, var(--bg-grad-top), var(--bg-grad-bottom));
+      padding: 80px 24px 32px;
+    }
+
+    /* ==========================================================================
+       Card Wrapper & Layout
+       ========================================================================== */
+    .card-container {
+      background-color: var(--card-bg);
+      border-radius: 23px;
+      box-shadow: 0px 50px 50px -20px rgba(53, 18, 122, 0.497194);
+      width: 100%;
+      max-width: 920px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ==========================================================================
+       Illustrations & Graphics
+       ========================================================================== */
+    .illustration-wrapper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Mobile Graphic Container */
+    .mobile-graphics {
+      position: absolute;
+      top: -108px;
+      width: 240px;
+      height: 180px;
+      pointer-events: none;
+    }
+
+    .mobile-graphics .woman-img {
+      width: 240px;
+      height: auto;
+      filter: drop-shadow(0 20px 20px rgba(0,0,0,0.15));
+    }
+
+    .mobile-graphics .shadow-bg {
+      position: absolute;
+      top: 108px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 240px;
+      z-index: -1;
+    }
+
+    /* Desktop Graphic Container (Hidden on Mobile) */
+    .desktop-graphics {
+      display: none;
+    }
+
+    /* ==========================================================================
+       FAQ Content Section
+       ========================================================================== */
+    .faq-content {
+      width: 100%;
+      padding: 132px 24px 48px;
+    }
+
+    .faq-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-text-dark);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    /* Accordion List */
+    .faq-list {
+      list-style: none;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--divider-color);
+    }
+
+    .faq-button {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: none;
+      border: none;
+      padding: 18px 0;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      text-align: left;
+      cursor: pointer;
+      transition: color 0.2s ease-in-out;
+    }
+
+    .faq-button:hover {
+      color: var(--primary-text-accent);
+    }
+
+    .faq-button[aria-expanded="true"] {
+      font-weight: 700;
+      color: var(--primary-text-dark);
+    }
+
+    .faq-button .arrow-icon {
+      margin-left: 16px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .faq-button[aria-expanded="true"] .arrow-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-panel {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.3s ease-out, opacity 0.25s ease-out, padding 0.3s ease-out;
+    }
+
+    .faq-panel p {
+      color: var(--text-subtle);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      padding-bottom: 0;
+    }
+
+    .faq-item.open .faq-panel {
+      max-height: 180px;
+      opacity: 1;
+      padding-bottom: 18px;
+    }
+
+    /* ==========================================================================
+       Footer / Attribution
+       ========================================================================== */
+    .attribution {
+      margin-top: 32px;
+      font-size: 11px;
+      text-align: center;
+      color: hsl(0, 0%, 100%);
+    }
+
+    .attribution a {
+      color: hsl(0, 0%, 100%);
+      text-decoration: underline;
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       Responsive Media Queries (Desktop >= 900px)
+       ========================================================================== */
+    @media (min-width: 900px) {
+      body {
+        padding: 40px 20px;
+      }
+
+      .card-container {
+        flex-direction: row;
+        align-items: stretch;
+        min-height: 510px;
+        overflow: visible;
+      }
+
+      .mobile-graphics {
+        display: none;
+      }
+
+      /* Desktop Graphic Positioning */
+      .illustration-wrapper {
+        width: 50%;
+        position: relative;
+        overflow: hidden;
+        border-top-left-radius: 23px;
+        border-bottom-left-radius: 23px;
+      }
+
+      .desktop-graphics {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .desktop-bg-pattern {
+        position: absolute;
+        top: -290px;
+        left: -575px;
+        width: 960px;
+        pointer-events: none;
+      }
+
+      .desktop-woman-illustration {
+        position: absolute;
+        top: 70px;
+        left: -82px;
+        width: 470px;
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      /* Floating Box Graphic on Desktop */
+      .desktop-box-illustration {
+        position: absolute;
+        top: 205px;
+        left: -93px;
+        width: 190px;
+        z-index: 10;
+        pointer-events: none;
+        filter: drop-shadow(0 15px 15px rgba(0,0,0,0.15));
+        animation: float 4s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+
+      /* Right Column Content */
+      .faq-content {
+        width: 50%;
+        padding: 65px 75px 65px 25px;
+      }
+
+      .faq-title {
+        text-align: left;
+        margin-bottom: 32px;
+      }
+
+      .faq-button {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card-container">
+    
+    <!-- Left / Top Illustration Area -->
+    <div class="illustration-wrapper">
+      
+      <!-- Mobile Illustration Graphic -->
+      <div class="mobile-graphics">
+        <!-- Background Shadow -->
+        <svg class="shadow-bg" viewBox="0 0 240 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="120" cy="52" rx="120" ry="52" fill="#E8E8EE"/>
+        </svg>
+        
+        <!-- Mobile Woman SVG Graphic -->
+        <svg class="woman-img" viewBox="0 0 237 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g filter="url(#filter0_d)">
+            <path d="M72.2 165.6c-13.6-11.4-18.4-30.8-12-47.5 6.4-16.7 22.3-27.9 40-27.9 11.2 0 21.8 4.6 29.4 12.6" stroke="#F47B56" stroke-width="3" stroke-linecap="round"/>
+            <path d="M125.4 35c-15.6 0-29.8 8.1-37.7 21.2-8 13.1-8.5 29.5-1.3 43.1" stroke="#F47B56" stroke-width="3" stroke-linecap="round"/>
+            <!-- Simplified vector illustration card artwork representation -->
+            <rect x="40" y="40" width="150" height="110" rx="16" fill="#F47B56" opacity="0.1"/>
+            <path d="M120 20C70 20 30 55 30 100c0 20 7 38 19 53L35 175l25-10c17 11 37 17 60 17 50 0 90-35 90-80s-40-80-90-80z" fill="#6565E7" opacity="0.15"/>
+            <path d="M90 70c0-16.6 13.4-30 30-30s30 13.4 30 30c0 10-5 18.8-12.6 24.2L132 110h-24l-5.4-15.8C95 88.8 90 80 90 70z" fill="#F47B56"/>
+            <circle cx="120" cy="135" r="6" fill="#F47B56"/>
+          </g>
+          <defs>
+            <filter id="filter0_d" x="0" y="0" width="237" height="180" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feDropShadow dx="0" dy="10" stdDeviation="10" flood-opacity="0.1"/>
+            </filter>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Desktop Graphics -->
+      <div class="desktop-graphics">
+        <!-- Desktop Background Pattern -->
+        <svg class="desktop-bg-pattern" viewBox="0 0 960 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M960 480C960 745.097 745.097 960 480 960C214.903 960 0 745.097 0 480C0 214.903 214.903 0 480 0C745.097 0 960 214.903 960 480Z" fill="url(#paint0_linear)"/>
+          <defs>
+            <linearGradient id="paint0_linear" x1="480" y1="0" x2="480" y2="960" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#796BFF"/>
+              <stop offset="1" stop-color="#6565E7"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <!-- Desktop Woman Illustration -->
+        <svg class="desktop-woman-illustration" viewBox="0 0 472 359" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <rect x="20" y="40" width="400" height="280" rx="20" fill="#6565E7" opacity="0.08"/>
+            <path d="M236 30C130 30 45 100 45 190c0 38 15 72 40 100L60 340l55-20c35 20 76 32 121 32 106 0 191-70 191-160S342 30 236 30z" fill="#F47B56" opacity="0.9"/>
+            <path d="M180 140c0-30 24-54 54-54s54 24 54 54c0 18-9 34-23 43l-10 29h-42l-10-29c-14-9-23-25-23-43z" fill="#FFFFFF"/>
+            <circle cx="234" cy="245" r="10" fill="#FFFFFF"/>
+          </g>
+        </svg>
+
+      </div>
+
+      <!-- Desktop Floating Box Outer Graphic -->
+      <svg class="desktop-box-illustration" viewBox="0 0 191 184" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M95.5 0L191 55v74l-95.5 55L0 129V55L95.5 0z" fill="#F47B56"/>
+        <path d="M95.5 0L191 55l-95.5 52L0 55 95.5 0z" fill="#FF9E7D"/>
+        <path d="M95.5 107L191 55v74l-95.5 55v-77z" fill="#E85E34"/>
+      </svg>
+
+    </div>
+
+    <!-- Right FAQ Accordion Area -->
+    <section class="faq-content">
+      <h1 class="faq-title">FAQ</h1>
+
+      <ul class="faq-list">
+
+        <!-- Question 1 -->
+        <li class="faq-item open">
+          <button class="faq-button" aria-expanded="true" aria-controls="faq-ans-1">
+            <span>How many team members can I invite?</span>
+            <svg class="arrow-icon" width="10" height="7" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1l4 4 4-4" stroke="#F47B56" stroke-width="2" fill="none" fill-rule="evenodd"/>
+            </svg>
+          </button>
+          <div id="faq-ans-1" class="faq-panel">
+            <p>You can invite up to 2 additional team members on the Free plan. There is no limit on team members for the Premium plan.</p>
+          </div>
+        </li>
+
+        <!-- Question 2 -->
+        <li class="faq-item">
+          <button class="faq-button" aria-expanded="false" aria-controls="faq-ans-2">
+            <span>What is the maximum file upload size?</span>
+            <svg class="arrow-icon" width="10" height="7" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1l4 4 4-4" stroke="#F47B56" stroke-width="2" fill="none" fill-rule="evenodd"/>
+            </svg>
+          </button>
+          <div id="faq-ans-2" class="faq-panel">
+            <p>No more than 2GB. All files must be in an accepted format to ensure smooth processing and storage management.</p>
+          </div>
+        </li>
+
+        <!-- Question 3 -->
+        <li class="faq-item">
+          <button class="faq-button" aria-expanded="false" aria-controls="faq-ans-3">
+            <span>How do I reset my password?</span>
+            <svg class="arrow-icon" width="10" height="7" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1l4 4 4-4" stroke="#F47B56" stroke-width="2" fill="none" fill-rule="evenodd"/>
+            </svg>
+          </button>
+          <div id="faq-ans-3" class="faq-panel">
+            <p>Click "Forgot password" from the login page or "Change password" under your account settings. A reset link will be sent to your registered email address.</p>
+          </div>
+        </li>
+
+        <!-- Question 4 -->
+        <li class="faq-item">
+          <button class="faq-button" aria-expanded="false" aria-controls="faq-ans-4">
+            <span>Can I cancel my subscription?</span>
+            <svg class="arrow-icon" width="10" height="7" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1l4 4 4-4" stroke="#F47B56" stroke-width="2" fill="none" fill-rule="evenodd"/>
+            </svg>
+          </button>
+          <div id="faq-ans-4" class="faq-panel">
+            <p>Yes, you can cancel your subscription at any time from your billing settings. You will retain access until the end of your current billing period.</p>
+          </div>
+        </li>
+
+        <!-- Question 5 -->
+        <li class="faq-item">
+          <button class="faq-button" aria-expanded="false" aria-controls="faq-ans-5">
+            <span>Do you provide additional support?</span>
+            <svg class="arrow-icon" width="10" height="7" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1l4 4 4-4" stroke="#F47B56" stroke-width="2" fill="none" fill-rule="evenodd"/>
+            </svg>
+          </button>
+          <div id="faq-ans-5" class="faq-panel">
+            <p>Chat and email support is available 24/7. Premium plan subscribers also get access to dedicated phone support and account managers.</p>
+          </div>
+        </li>
+
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noopener noreferrer">Frontend Mentor</a>. 
+    Coded with ❤️.
+  </footer>
+
+  <!-- Interactive Accordion Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const faqButtons = document.querySelectorAll('.faq-button');
+
+      faqButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const faqItem = button.parentElement;
+          const isCurrentlyOpen = faqItem.classList.contains('open');
+
+          // Close all open items for clean single-accordion behavior
+          document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('open');
+            const btn = item.querySelector('.faq-button');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+          });
+
+          // Toggle clicked item if it wasn't open before
+          if (!isCurrentlyOpen) {
+            faqItem.classList.add('open');
+            button.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
