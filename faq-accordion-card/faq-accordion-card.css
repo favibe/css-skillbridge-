@@ -1,0 +1,225 @@
+/*CSS Variables*/
+:root {
+  /* Colors from Style Guide */
+  --text-very-dark-blue: hsl(238, 29%, 16%);
+  --text-soft-red: hsl(14, 88%, 65%);
+  --text-dark-grayish-blue: hsl(237, 12%, 33%);
+  --text-grayish-blue: hsl(240, 6%, 50%);
+  --divider-color: hsl(240, 5%, 91%);
+
+  --bg-gradient-top: hsl(273, 75%, 66%);
+  --bg-gradient-bottom: hsl(273, 54%, 51%);
+  --card-bg: hsl(0, 0%, 100%);
+
+  /* Font */
+  --font-main: 'Kumbh Sans', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+    font-family: var(--font-main);
+    font-size: 16px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 148px 24px 32px;
+    background: linear-gradient(180deg, var(--bg-gradient-top), var(--bg-gradient-bottom));
+}
+/*card wrapper and container*/
+.class-container {
+    background-color: var(--card-bg);
+    border-radius: 24px;
+    box-shadow: 0 50px 50px -20px rgba(53, 18, 122, 0.5);
+    width: 100%;
+    max-width: 920px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*  Illustrations & Graphics */
+.illustration-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+/* Mobile Graphics */
+.mobile-graphics {
+    position: absolute;
+    top: -108px;
+    width: 240px;
+    height: 180px;
+    pointer-events: none;
+    }
+.mobile-graphics .woman-img {
+    height: auto;
+    width: 240px;
+    filter: drop-shadow(0 20px 20px rgba(0,0,0,0.15));
+    }
+
+.mobile-graphics .shadow-bg {
+    position: absolute;
+    top: 108px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    z-index: -1;
+    }
+
+/* Desktop Graphic Container (Hidden on Mobile) */
+.desktop-graphics {
+    display: none;
+    }
+/* FAQ Content */
+.faq-content {
+  width: 100%;
+  padding: 132px 24px 48px; /* Top padding keeps text from overlapping mobile image */
+}
+
+.faq-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-very-dark-blue);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.faq-list {
+  list-style: none;
+}
+.faq-item {
+  border-bottom: 1px solid var(--divider-color);
+}
+
+.faq-button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 18px 0;
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: var(--text-dark-grayish-blue);
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+.faq-button:hover {
+  color: var(--text-soft-red);
+}
+.faq-button[aria-expanded="true"] {
+  font-weight: 700;
+  color: var(--text-very-dark-blue);
+}
+/* arrow icon */
+.faq-button .arrow-icon {
+  margin-left: 16px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+.faq-button[aria-expanded="true"] .arrow-icon {
+  transform: rotate(180deg);
+}
+
+.faq-panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease-out, opacity 0.25s ease-out, padding 0.3s ease-out;
+}
+
+.faq-panel p {
+  color: var(--text-grayish-blue);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.faq-item.open .faq-panel {
+  max-height: 180px;
+  opacity: 1;
+  padding-bottom: 18px;
+}
+
+/* Media Queries */
+/* ==========================================================================
+   5. Desktop Layout (@media Query)
+   ========================================================================== */
+@media (min-width: 900px) {
+
+  body {
+    padding: 0;
+  }
+
+
+  .class-container {
+    flex-direction: row;
+    align-items: center;
+    min-height: 509px;
+    overflow: visible; 
+  }
+
+  
+  .mobile-graphics {
+    display: none;
+  }
+
+  .illustration-wrapper {
+    width: 50%;
+    height: 100%;
+    min-height: 509px;
+    position: relative;
+    overflow: hidden; 
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+  }
+
+  .desktop-graphics {
+    display: block;
+    position: relative;
+    width: 100%; 
+    height: 100%;
+  }
+
+  .desktop-bg-pattern {
+    position: absolute;
+    top: -290px;
+    left: -575px;
+    max-width: none;
+  }
+
+  .desktop-woman-illustration {
+    position: absolute;
+    top: 70px;
+    left: -80px;
+    max-width: none;
+  }
+
+ 
+  .desktop-box-illustration {
+    display: block;
+    position: absolute;
+    top: 200px;
+    left: -93px;
+    z-index: 10; 
+  }
+
+  
+  .faq-content {
+    width: 50%; 
+    padding: 60px 64px 60px 0;
+  }
+
+  .faq-title {
+    text-align: left;
+  }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Accordion Card</title>
+    <link rel="stylesheet" href="faq-accordion-card.css">
+</head>
+<body>
+    <main class="class-container">
+         <!-- Desktop Floating Box -->
+        <img src="./images/illustration-box-desktop-faq.svg" class="desktop-box-illustration" alt="">
+        <!--Graphics/Illustrations-->
+        <div class="illustration-wrapper">
+            <!--Mobile graphics-->
+            <div class="mobile-graphics">
+                <img src="../images/bg-pattern-mobile-faq.svg" class="shadow-bg" alt="mobile-bg">
+                <img src="../images/illustration-woman-online-mobile-faq.svg" class="woman-img" alt="Woman working online">
+            </div>
+            <!--Desktop graphics-->
+            <div class="desktop-graphics">
+                <img src="../images/bg-pattern-desktop-faq.svg" class="desktop-bg-pattern" alt="desktop-bg">
+                <img src="../images/illustration-woman-online-desktop-faq.svg" class="desktop-woman-illustration" alt="Woman working online"> 
+            </div>
+
+           
+        </div>
+        <!--Faq Content Area-->
+        <section class="faq-content">
+            <h1 class="faq-title">FAQ</h1>
+            <ul class="faq-list">
+                <!--Question 1-->
+                <li class="faq-item open">
+                    <button class="faq-button"aria-expanded="true" aria-controls="faq-ans-1">
+                        <span>What is the maximum file upload size?</span>
+                        <img src="../images/icon-arrow-down-faq.svg" class="arrow-icon" alt="arrow-icon">
+                    </button>
+                    <div id="faq-ans-1" class="faq-panel">
+                        <p>No more than 2GB. All files must be in an accepted format to ensure smooth processing and storage management.</p>
+                    </div>
+                </li>
+                <!--Question 2-->
+                <li class="faq-item ">
+                    <button class="faq-button" aria-expanded="false" aria-controls="faq-ans-2">
+                        <span>How many team members can I invite?</span>
+                        <img src="../images/icon-arrow-down-faq.svg" class="arrow-icon" alt="arrow-icon">
+                    </button>
+                    <div id="faq-ans-2" class="faq-panel">
+                        <p>You can invite up to 2 additional team members on the Free plan. There is no limit on team members for the Premium plan.</p>
+                    </div>
+                </li>
+                <!--Question 3-->
+                <li class="faq-item ">
+                    <button class="faq-button" aria-expanded="false" aria-controls="faq-ans-3">
+                        <span>How do I reset my password?</span>
+                        <img src="../images/icon-arrow-down-faq.svg" class="arrow-icon" alt="arrow-icon">
+                    </button>
+                    <div id="faq-ans-3" class="faq-panel">
+                        <p>Click "Forgot password" from the login page or "Change password" under your account settings. A reset link will be sent to your registered email address.</p>
+                    </div>
+                </li>
+                <!--Question 4-->
+                <li class="faq-item ">
+                    <button class="faq-button" aria-expanded="false" aria-controls="faq-ans-4">
+                        <span>Can I cancel my subscription?</span>
+                        <img src="../images/icon-arrow-down-faq.svg" class="arrow-icon" alt="arrow-icon">
+                    </button>
+                    <div id="faq-ans-4" class="faq-panel">
+                        <p>Yes, you can cancel your subscription at any time from your billing settings. You will retain access until the end of your current billing period.</p>
+                    </div>
+                </li>
+                <!--Question 5-->
+                <li class="faq-item ">
+                    <button class="faq-button" aria-expanded="false" aria-controls="faq-ans-5">
+                        <span>Do you provide additional support?</span>
+                        <img src="../images/icon-arrow-down-faq.svg" class="arrow-icon" alt="arrow-icon">
+                    </button>
+                    <div id="faq-ans-5" class="faq-panel">
+                        <p>Chat and email support is available 24/7. Premium plan subscribers also get access to dedicated phone support and account managers</p>                    
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <script src="faq-accordion-card.js" defer></script>
+</body>
+</html>
