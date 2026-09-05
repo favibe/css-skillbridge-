@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btn) btn.setAttribute('aria-expanded', 'false');
       });
 
-      // 2. Toggle the clicked item if it wasn't already open
+      // Toggle the clicked item if it wasn't already open
       if (!isCurrentlyOpen) {
         currentItem.classList.add('open');
         button.setAttribute('aria-expanded', 'true');
